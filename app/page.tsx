@@ -315,9 +315,11 @@ export default function Home() {
 
   // Ganti tema, simpan pilihannya di browser
   function toggleTheme() {
-    const next =
-      document.documentElement.dataset.theme === "dark" ? "light" : "dark";
-    document.documentElement.dataset.theme = next;
+    const root = document.documentElement;
+    const next = root.dataset.theme === "dark" ? "light" : "dark";
+    root.classList.add("theme-transition");
+    root.dataset.theme = next;
+    window.setTimeout(() => root.classList.remove("theme-transition"), 350);
     try {
       localStorage.setItem("theme", next);
     } catch {}
