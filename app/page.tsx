@@ -80,8 +80,8 @@ const keywords: Record<Topic, string[]> = {
 
 const content = {
   en: {
-    greeting: "Hi, I’m Bagas 👋",
-    subtitle: "Ask me anything about my projects and experience.",
+    greeting: "Bagaskara Ridho Vandio",
+    subtitle: "Welcome to My Portfolio, let's dive in!",
     placeholder: "Ask me anything...",
     send: "Send",
     cv: "Download CV",
@@ -117,8 +117,8 @@ const content = {
       "I’m not sure about that yet. Try asking about my projects, experience, skills, or how to contact me.",
   },
   id: {
-    greeting: "Halo, aku Bagas 👋",
-    subtitle: "Tanya apa saja soal project dan pengalamanku.",
+    greeting: "Bagaskara Ridho Vandio",
+    subtitle: "Selamat datang di portofolioku, yuk cari tau lebih lanjut!",
     placeholder: "Tanyakan sesuatu...",
     send: "Kirim",
     cv: "Unduh CV",
@@ -177,7 +177,7 @@ function linkify(text: string) {
         href={href}
         target="_blank"
         rel="noopener noreferrer"
-        className="text-[#c96442] underline underline-offset-2 hover:opacity-80"
+        className="text-accent underline underline-offset-2 hover:opacity-80"
       >
         {part}
       </a>
@@ -211,7 +211,17 @@ function TypingText({
   return <>{linkify(animate ? text.slice(0, count) : text)}</>;
 }
 
-const icons: Record<Topic | "plus" | "download" | "menu", string> = {
+const icons: Record<
+  | Topic
+  | "plus"
+  | "download"
+  | "menu"
+  | "panelClose"
+  | "sun"
+  | "moon"
+  | "panelOpen",
+  string
+> = {
   about:
     "M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2M12 3a4 4 0 1 0 0 8 4 4 0 0 0 0-8z",
   projects:
@@ -224,6 +234,12 @@ const icons: Record<Topic | "plus" | "download" | "menu", string> = {
   plus: "M12 5v14M5 12h14",
   download: "M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4M7 10l5 5 5-5M12 15V3",
   menu: "M4 6h16M4 12h16M4 18h16",
+  panelClose:
+    "M5 3h14a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2zM9 3v18M16 15l-3-3 3-3",
+  panelOpen:
+    "M5 3h14a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2zM9 3v18M14 9l3 3-3 3",
+  sun: "M12 8a4 4 0 1 0 0 8 4 4 0 0 0 0-8zM12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41",
+  moon: "M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z",
 };
 
 function Icon({ d, className = "h-4 w-4" }: { d: string; className?: string }) {
@@ -243,11 +259,23 @@ function Icon({ d, className = "h-4 w-4" }: { d: string; className?: string }) {
   );
 }
 
+function Avatar({ className = "h-7 w-7" }: { className?: string }) {
+  return (
+    // eslint-disable-next-line @next/next/no-img-element
+    <img
+      src="/avatar.jpg"
+      alt="Bagaskara"
+      className={`shrink-0 rounded-full object-cover ${className}`}
+    />
+  );
+}
+
 export default function Home() {
   const [lang, setLang] = useState<Lang>("en");
   const [input, setInput] = useState("");
   const [messages, setMessages] = useState<Message[]>([]);
-  const [menuOpen, setMenuOpen] = useState(false);
+  const [menuOpen, setMenuOpen] = useState(false); // sidebar di HP
+  const [collapsed, setCollapsed] = useState(false); // sidebar di desktop
   const [thinking, setThinking] = useState(false);
   const [activeTopic, setActiveTopic] = useState<Topic | null>(null);
   const t = content[lang];
@@ -275,6 +303,25 @@ export default function Home() {
       if (timerRef.current) clearTimeout(timerRef.current);
     };
   }, []);
+
+  // Desktop: lipat/buka sidebar. HP: tampilkan/sembunyikan sidebar melayang
+  function toggleSidebar() {
+    if (window.matchMedia("(min-width: 768px)").matches) {
+      setCollapsed((c) => !c);
+    } else {
+      setMenuOpen((o) => !o);
+    }
+  }
+
+  // Ganti tema, simpan pilihannya di browser
+  function toggleTheme() {
+    const next =
+      document.documentElement.dataset.theme === "dark" ? "light" : "dark";
+    document.documentElement.dataset.theme = next;
+    try {
+      localStorage.setItem("theme", next);
+    } catch {}
+  }
 
   function ask(text: string, topic?: Topic) {
     if (thinking) return;
@@ -311,7 +358,7 @@ export default function Home() {
   }
 
   return (
-    <div className="flex h-dvh bg-[#faf9f5]">
+    <div className="flex h-dvh bg-bg">
       {/* Lapisan gelap di belakang sidebar (hanya HP) */}
       {menuOpen && (
         <div
@@ -322,89 +369,112 @@ export default function Home() {
 
       {/* Sidebar */}
       <aside
-        className={`fixed inset-y-0 left-0 z-20 flex w-64 flex-col border-r border-[#e3e0d5] bg-[#f0eee6] p-4 transition-transform md:static md:translate-x-0 ${
+        className={`fixed inset-y-0 left-0 z-20 w-64 shrink-0 overflow-hidden border-r border-line bg-sidebar transition-all duration-300 md:static md:translate-x-0 ${
           menuOpen ? "translate-x-0" : "-translate-x-full"
-        }`}
+        } ${collapsed ? "md:w-0 md:border-r-0" : "md:w-64"}`}
       >
-        {/* Profil singkat */}
-        <div className="mb-5 flex items-center gap-3">
-          <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-[#c96442] font-serif text-lg text-white">
-            B
-          </div>
-          <div className="min-w-0">
-            <h2 className="truncate font-serif text-base text-[#29261b]">
-              Bagaskara
-            </h2>
-            <p className="truncate text-xs text-[#6b6860]">{t.role}</p>
-          </div>
-        </div>
-
-        {/* Percakapan baru */}
-        <button
-          onClick={newChat}
-          className="mb-4 flex items-center gap-2 rounded-lg border border-[#e3e0d5] bg-white px-3 py-2 text-sm text-[#29261b] transition-colors hover:bg-[#faf9f5]"
-        >
-          <Icon d={icons.plus} />
-          {t.newChat}
-        </button>
-
-        {/* Menu topik */}
-        <nav className="flex flex-col gap-1">
-          {topics.map((tp) => (
+        {/* Lebar isi dikunci 16rem supaya tidak berantakan saat sidebar menyempit */}
+        <div className="flex h-full w-64 flex-col p-4">
+          {/* Profil singkat + tombol tutup */}
+          <div className="mb-5 flex items-center gap-3">
+            <Avatar className="h-10 w-10" />
+            <div className="min-w-0 flex-1">
+              <h2 className="truncate font-serif text-base text-ink">
+                Bagaskara
+              </h2>
+              <p className="truncate text-xs text-muted">{t.role}</p>
+            </div>
             <button
-              key={tp}
-              onClick={() => ask(t.questions[tp], tp)}
-              className={`flex items-center gap-3 rounded-lg px-3 py-2 text-left text-sm transition-colors ${
-                activeTopic === tp
-                  ? "bg-white font-medium text-[#c96442] shadow-sm"
-                  : "text-[#29261b] hover:bg-white/60"
-              }`}
+              onClick={toggleSidebar}
+              aria-label="Close sidebar"
+              className="rounded-lg p-2 text-muted transition-colors hover:bg-soft hover:text-ink"
             >
-              <Icon d={icons[tp]} />
-              {t.labels[tp]}
+              <Icon d={icons.panelClose} />{" "}
             </button>
-          ))}
-        </nav>
+          </div>
 
-        {/* Tombol unduh CV */}
-        <a
-          href="/cv.pdf"
-          download
-          className="mt-auto flex items-center justify-center gap-2 rounded-lg border border-[#e3e0d5] bg-white px-3 py-2 text-sm text-[#29261b] transition-colors hover:bg-[#faf9f5]"
-        >
-          <Icon d={icons.download} />
-          {t.cv}
-        </a>
+          {/* Percakapan baru */}
+          <button
+            onClick={newChat}
+            className="mb-4 flex items-center gap-2 rounded-lg border border-line bg-surface px-3 py-2 text-sm text-ink transition-colors hover:bg-soft"
+          >
+            <Icon d={icons.plus} />
+            {t.newChat}
+          </button>
 
-        {/* Pilihan bahasa */}
-        <div className="mt-3 flex rounded-lg bg-[#e3e0d5]/60 p-1 text-sm">
-          {(["en", "id"] as Lang[]).map((l) => (
-            <button
-              key={l}
-              onClick={() => setLang(l)}
-              aria-pressed={lang === l}
-              className={`flex-1 rounded-md py-1 transition-colors ${
-                lang === l
-                  ? "bg-white text-[#29261b] shadow-sm"
-                  : "text-[#6b6860] hover:text-[#29261b]"
-              }`}
-            >
-              {l.toUpperCase()}
-            </button>
-          ))}
+          {/* Menu topik */}
+          <nav className="flex flex-col gap-1">
+            {topics.map((tp) => (
+              <button
+                key={tp}
+                onClick={() => ask(t.questions[tp], tp)}
+                className={`flex items-center gap-3 rounded-lg px-3 py-2 text-left text-sm transition-colors ${
+                  activeTopic === tp
+                    ? "bg-soft font-medium text-accent"
+                    : "text-ink hover:bg-soft"
+                }`}
+              >
+                <Icon d={icons[tp]} />
+                {t.labels[tp]}
+              </button>
+            ))}
+          </nav>
+
+          {/* Tombol unduh CV */}
+          <a
+            href="/cv.pdf"
+            download
+            className="mt-auto flex items-center justify-center gap-2 rounded-lg border border-line bg-surface px-3 py-2 text-sm text-ink transition-colors hover:bg-soft"
+          >
+            <Icon d={icons.download} />
+            {t.cv}
+          </a>
+
+          {/* Pilihan bahasa */}
+          <div className="mt-3 flex rounded-lg bg-line/60 p-1 text-sm">
+            {(["en", "id"] as Lang[]).map((l) => (
+              <button
+                key={l}
+                onClick={() => setLang(l)}
+                aria-pressed={lang === l}
+                className={`flex-1 rounded-md py-1 transition-colors ${
+                  lang === l
+                    ? "bg-surface text-ink shadow-sm"
+                    : "text-muted hover:text-ink"
+                }`}
+              >
+                {l.toUpperCase()}
+              </button>
+            ))}
+          </div>
         </div>
       </aside>
 
       {/* Area utama */}
-      <main className="flex flex-1 flex-col overflow-hidden">
-        {/* Tombol menu (hanya HP) */}
-        <div className="flex items-center p-3 md:hidden">
+      <main className="flex min-w-0 flex-1 flex-col overflow-hidden">
+        {/* Bilah atas: buka sidebar (kiri) dan ganti tema (kanan) */}
+        <div className="flex items-center justify-between p-3">
           <button
-            onClick={() => setMenuOpen(true)}
-            aria-label="Open menu"
-            className="rounded-lg px-3 py-2 text-[#29261b] hover:bg-[#f0eee6]"
+            onClick={toggleSidebar}
+            aria-label="Open sidebar"
+            className={`rounded-lg p-2 text-ink transition-colors hover:bg-soft ${
+              collapsed ? "" : "md:invisible"
+            }`}
           >
-            <Icon d={icons.menu} className="h-5 w-5" />
+            <Icon d={icons.menu} className="h-5 w-5 md:hidden" />
+            <Icon
+              d={icons.panelOpen}
+              className="hidden h-5 w-5 md:block"
+            />{" "}
+          </button>
+
+          <button
+            onClick={toggleTheme}
+            aria-label="Toggle theme"
+            className="rounded-lg p-2 text-ink transition-colors hover:bg-soft"
+          >
+            <Icon d={icons.moon} className="h-5 w-5 dark:hidden" />
+            <Icon d={icons.sun} className="hidden h-5 w-5 dark:block" />
           </button>
         </div>
 
@@ -422,7 +492,7 @@ export default function Home() {
                     return (
                       <div
                         key={i}
-                        className="fade-up ml-auto max-w-[80%] rounded-2xl bg-[#f0eee6] px-4 py-2 text-[#29261b]"
+                        className="fade-up ml-auto max-w-[80%] rounded-2xl bg-soft px-4 py-2 text-ink"
                       >
                         {m.text}
                       </div>
@@ -435,10 +505,8 @@ export default function Home() {
                       key={i}
                       className="fade-up flex max-w-[85%] items-start gap-3"
                     >
-                      <div className="mt-1 flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-[#c96442] text-xs font-semibold text-white">
-                        B
-                      </div>
-                      <div className="whitespace-pre-line py-1 leading-relaxed text-[#29261b]">
+                      <Avatar className="mt-1 h-7 w-7" />
+                      <div className="whitespace-pre-line py-1 leading-relaxed text-ink">
                         <TypingText
                           key={botText}
                           text={botText}
@@ -452,9 +520,7 @@ export default function Home() {
 
                 {thinking && (
                   <div className="fade-up flex items-center gap-3">
-                    <div className="flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-[#c96442] text-xs font-semibold text-white">
-                      B
-                    </div>
+                    <Avatar className="h-7 w-7" />
                     <div className="flex gap-1 py-3">
                       <span className="dot" />
                       <span className="dot" />
@@ -470,13 +536,9 @@ export default function Home() {
               key="hello"
               className="fade-up flex flex-col items-center px-4 text-center"
             >
-              <div className="mb-4 flex h-14 w-14 items-center justify-center rounded-full bg-[#c96442] font-serif text-2xl text-white">
-                B
-              </div>
-              <h1 className="font-serif text-4xl text-[#29261b]">
-                {t.greeting}
-              </h1>
-              <p className="mt-2 text-[#6b6860]">{t.subtitle}</p>
+              <Avatar className="mb-4 h-24 w-24" />
+              <h1 className="font-serif text-4xl text-ink">{t.greeting}</h1>
+              <p className="mt-2 text-muted">{t.subtitle}</p>
             </div>
           )}
 
@@ -487,18 +549,18 @@ export default function Home() {
               hasMessages ? "max-w-3xl pb-6" : "mt-8 max-w-2xl"
             }`}
           >
-            <div className="flex items-center gap-2 rounded-2xl border border-[#e3e0d5] bg-white p-3 shadow-sm transition-colors focus-within:border-[#c96442]">
+            <div className="flex items-center gap-2 rounded-2xl border border-line bg-surface p-3 shadow-sm transition-colors focus-within:border-accent">
               <input
                 value={input}
                 onChange={(e) => setInput(e.target.value)}
-                className="flex-1 bg-transparent px-2 text-[#29261b] outline-none placeholder:text-[#6b6860]"
+                className="flex-1 bg-transparent px-2 text-ink outline-none placeholder:text-muted"
                 placeholder={t.placeholder}
               />
               <button
                 type="submit"
                 disabled={!input.trim()}
                 aria-label={t.send}
-                className="flex h-9 w-9 items-center justify-center rounded-full bg-[#c96442] text-white transition hover:opacity-90 disabled:opacity-40"
+                className="flex h-9 w-9 items-center justify-center rounded-full bg-accent text-white transition hover:opacity-90 disabled:opacity-40"
               >
                 <svg
                   width="16"
@@ -523,7 +585,7 @@ export default function Home() {
                 <button
                   key={tp}
                   onClick={() => ask(t.questions[tp], tp)}
-                  className="rounded-full border border-[#e3e0d5] bg-white px-4 py-2 text-sm text-[#29261b] transition hover:-translate-y-0.5 hover:bg-[#f0eee6] hover:shadow-sm"
+                  className="rounded-full border border-line bg-surface px-4 py-2 text-sm text-ink transition hover:-translate-y-0.5 hover:bg-soft hover:shadow-sm"
                 >
                   {t.questions[tp]}
                 </button>

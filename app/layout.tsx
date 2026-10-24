@@ -1,28 +1,37 @@
 import type { Metadata } from "next";
-import { Inter } from "next/font/google";
+import { Inter, Lora } from "next/font/google";
 import "./globals.css";
 
 const inter = Inter({ subsets: ["latin"], variable: "--font-inter" });
+const lora = Lora({ subsets: ["latin"], variable: "--font-lora" });
 
 export const metadata: Metadata = {
   title: "Bagaskara Ridho Vandio | Portfolio",
   description:
-    "Computer Science graduate focused on AI/ML. Ask me about my projects and experience.",
+    "Computer Science graduate focused on AI/ML and mobile development. Ask me about my projects and experience.",
   openGraph: {
     title: "Bagaskara Ridho Vandio | Portfolio",
     description:
-      "Computer Science graduate focused on AI Enggineering. Ask me about my projects and experience.",
+      "Computer Science graduate focused on AI/ML and mobile development. Ask me about my projects and experience.",
     type: "website",
   },
   twitter: { card: "summary_large_image" },
 };
 
+// Dijalankan sebelum halaman tampil: pakai pilihan tersimpan, kalau belum ada ikuti sistem
+const themeScript = `(function(){try{var t=localStorage.getItem("theme");if(!t){t=window.matchMedia("(prefers-color-scheme: dark)").matches?"dark":"light"}document.documentElement.dataset.theme=t}catch(e){}})();`;
+
 export default function RootLayout({
   children,
 }: Readonly<{ children: React.ReactNode }>) {
   return (
-    <html lang="en">
-      <body className={`${inter.variable} antialiased`}>{children}</body>
+    <html lang="en" suppressHydrationWarning>
+      <head>
+        <script dangerouslySetInnerHTML={{ __html: themeScript }} />
+      </head>
+      <body className={`${inter.variable} ${lora.variable} antialiased`}>
+        {children}
+      </body>
     </html>
   );
 }

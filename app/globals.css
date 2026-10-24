@@ -1,13 +1,52 @@
 @import "tailwindcss";
 
+/* Tema gelap dipicu atribut data-theme="dark" di <html> */
+@custom-variant dark (&:where([data-theme="dark"], [data-theme="dark"] *));
+
+:root {
+  --bg: #fefdfb;
+  --sidebar: #fbfaf8;
+  --surface: #ffffff;
+  --soft: #f1efe8;
+  --line: #e7e4db;
+  --ink: #29261b;
+  --muted: #6b6860;
+  --accent: #c96442;
+  color-scheme: light;
+}
+
+:root[data-theme="dark"] {
+  --bg: #262624;
+  --sidebar: #1f1e1d;
+  --surface: #30302e;
+  --soft: #393937;
+  --line: #3d3c39;
+  --ink: #ece9e1;
+  --muted: #a19e94;
+  --accent: #d97757;
+  color-scheme: dark;
+}
+
 @theme inline {
+  --color-bg: var(--bg);
+  --color-sidebar: var(--sidebar);
+  --color-surface: var(--surface);
+  --color-soft: var(--soft);
+  --color-line: var(--line);
+  --color-ink: var(--ink);
+  --color-muted: var(--muted);
+  --color-accent: var(--accent);
   --font-serif: var(--font-lora), Georgia, serif;
 }
 
 body {
   font-family: var(--font-inter), system-ui, sans-serif;
-  background: #faf9f5;
-  color: #29261b;
+  background: var(--bg);
+  color: var(--ink);
+}
+
+::selection {
+  background: color-mix(in srgb, var(--accent) 30%, transparent);
 }
 
 @keyframes fade-up {
@@ -15,6 +54,7 @@ body {
     opacity: 0;
     transform: translateY(6px);
   }
+
   to {
     opacity: 1;
     transform: none;
@@ -26,16 +66,30 @@ body {
 }
 
 @keyframes blink {
-  0%, 80%, 100% { opacity: 0.25; }
-  40% { opacity: 1; }
+
+  0%,
+  80%,
+  100% {
+    opacity: 0.25;
+  }
+
+  40% {
+    opacity: 1;
+  }
 }
 
 .dot {
   width: 6px;
   height: 6px;
   border-radius: 9999px;
-  background: #6b6860;
+  background: var(--muted);
   animation: blink 1.2s infinite;
 }
-.dot:nth-child(2) { animation-delay: 0.15s; }
-.dot:nth-child(3) { animation-delay: 0.3s; }
+
+.dot:nth-child(2) {
+  animation-delay: 0.15s;
+}
+
+.dot:nth-child(3) {
+  animation-delay: 0.3s;
+}
