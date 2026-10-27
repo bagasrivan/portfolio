@@ -37,6 +37,7 @@ export function useApp() {
   if (!ctx) throw new Error("useApp harus dipakai di dalam <AppShell>");
   return ctx;
 }
+const pageTopics: Topic[] = ["about", "skills", "contact"];
 
 export default function AppShell({ children }: { children: React.ReactNode }) {
   const [lang, setLang] = useState<Lang>("en");
@@ -177,10 +178,10 @@ export default function AppShell({ children }: { children: React.ReactNode }) {
               {t.newChat}
             </button>
 
-            {/* Menu: About membuka halaman sendiri, yang lain masih memulai chat */}
+            {/* Menu: Membuka halaman sendiri */}
             <nav className="flex flex-col gap-1">
               {topics.map((tp) => {
-                if (tp === "about" || tp === "contact") {
+                if (pageTopics.includes(tp)) {
                   const href = `/${tp}`;
                   const active = pathname.startsWith(href);
                   return (

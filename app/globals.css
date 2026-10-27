@@ -136,3 +136,47 @@ html.theme-transition *::after {
     transition: none !important;
   }
 }
+
+/* Chip skill mengambang */
+@keyframes float {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+
+  50% {
+    transform: translateY(-8px);
+  }
+}
+
+.float {
+  animation: float var(--dur, 5s) ease-in-out infinite;
+  animation-delay: var(--delay, 0s);
+}
+
+.float:hover {
+  animation-play-state: paused;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .float {
+    animation: none;
+  }
+}
+
+/* Chip level "comfort zone": border gradasi */
+.chip-comfort {
+  border: 2px solid transparent;
+  background:
+    linear-gradient(var(--surface), var(--surface)) padding-box,
+    linear-gradient(135deg, var(--accent), #e8b07a) border-box;
+  color: var(--ink);
+  font-weight: 600;
+}
+
+/* Chip level "familiar": abu-abu lembut */
+.chip-familiar {
+  border: 2px solid var(--line);
+  background: var(--surface);
+  color: var(--muted);
+}
