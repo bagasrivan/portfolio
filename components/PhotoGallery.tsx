@@ -174,7 +174,7 @@ export default function PhotoGallery() {
                   fill
                   draggable={false}
                   sizes="(min-width: 768px) 384px, 90vw"
-                  className="pointer-events-none object-cover"
+                  className="pointer-events-none object-cover object-[50%_60%]"
                 />
                 {p.caption && (
                   <span className="absolute inset-x-0 bottom-0 bg-linear-to-t from-black/60 to-transparent p-4 text-left text-sm text-white">
@@ -216,14 +216,18 @@ export default function PhotoGallery() {
 
           <div
             onClick={(e) => e.stopPropagation()}
-            className="relative h-[85dvh] w-full max-w-3xl"
+            className="relative overflow-hidden rounded-2xl"
+            style={{
+              width: "min(calc(85dvh * 0.8), calc(100vw - 2rem))",
+              height: "min(85dvh, calc((100vw - 2rem) * 1.25))",
+            }}
           >
             <Image
               src={photos[active].src}
               alt={photos[active].alt}
               fill
-              sizes="(min-width: 768px) 768px, 100vw"
-              className="object-contain"
+              sizes="(min-width: 768px) 700px, 100vw"
+              className="object-cover object-[50%_60%]"
             />
           </div>
 
