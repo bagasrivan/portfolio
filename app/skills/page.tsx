@@ -63,7 +63,6 @@ export default function SkillsPage() {
                       </button>
                     ))}
                   </div>
-                  <p className="mt-1 text-xs text-muted">{c.hint}</p>
                 </>
               );
             }}
