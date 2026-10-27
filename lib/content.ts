@@ -80,7 +80,7 @@ export const content = {
     subtitle: "Welcome to My Portfolio, let's dive in!",
     placeholder: "Ask me anything...",
     send: "Send",
-    cv: "Download CV",
+    cv: "Download Resume",
     role: "AI Engineer",
     newChat: "New chat",
     labels: {
@@ -117,7 +117,7 @@ export const content = {
     subtitle: "Selamat datang di portofolioku, yuk cari tau lebih lanjut!",
     placeholder: "Tanyakan sesuatu...",
     send: "Kirim",
-    cv: "Unduh CV",
+    cv: "Unduh Resume",
     role: "AI Engineer",
     newChat: "Percakapan baru",
     labels: {
