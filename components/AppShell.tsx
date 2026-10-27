@@ -180,12 +180,13 @@ export default function AppShell({ children }: { children: React.ReactNode }) {
             {/* Menu: About membuka halaman sendiri, yang lain masih memulai chat */}
             <nav className="flex flex-col gap-1">
               {topics.map((tp) => {
-                if (tp === "about") {
-                  const active = pathname.startsWith("/about");
+                if (tp === "about" || tp === "contact") {
+                  const href = `/${tp}`;
+                  const active = pathname.startsWith(href);
                   return (
                     <Link
                       key={tp}
-                      href="/about"
+                      href={href}
                       onClick={() => setMenuOpen(false)}
                       className={`${itemBase} ${active ? itemActive : itemIdle}`}
                     >
