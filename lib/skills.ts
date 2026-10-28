@@ -93,6 +93,41 @@ export type Certificate = {
 
 export const certificates: Certificate[] = [
   {
+    id: "build-an-ai-agent-creedyly",
+    title: "Build an AI Agent Creedly",
+    image: "/certificates/Build an AI Agent Creedly.jpg",
+  },
+  {
+    id: "build-an-ai-agent",
+    title: "Build an AI Agent",
+    image: "/certificates/Build an AI Agent.jpg",
+  },
+  {
+    id: "introduction-to-llm",
+    title: "Introduction to Large Language Models",
+    image: "/certificates/Introduction to Large Language Models.jpg",
+  },
+  {
+    id: "python-basic-programming",
+    title: "Memulai Pemrograman dengan Python",
+    image: "/certificates/Memulai Pemrograman dengan Python.jpg",
+  },
+  {
+    id: "flutter-for-beginner",
+    title: "Belajar Membuat Aplikasi Flutter untuk Pemula",
+    image: "/certificates/Belajar Membuat Aplikasi Flutter untuk Pemula.jpg",
+  },
+  {
+    id: "dart-basic-programming",
+    title: "Memulai Pemrograman dengan Dart",
+    image: "/certificates/Memulai Pemrograman dengan Dart.jpg",
+  },
+  {
+    id: "basic-git-using-github",
+    title: "Belajar Dasar Git dengan GitHub",
+    image: "/certificates/Belajar Dasar Git dengan GitHub.jpg",
+  },
+  {
     id: "applied-machine-learning-for-android-developer",
     title: "Belajar Penerapan Machine Learning untuk Android",
     image: "/certificates/Belajar Penerapan Machine Learning untuk Android.jpg",
