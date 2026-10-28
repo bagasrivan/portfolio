@@ -37,7 +37,7 @@ export function useApp() {
   if (!ctx) throw new Error("useApp harus dipakai di dalam <AppShell>");
   return ctx;
 }
-const pageTopics: Topic[] = ["about", "skills", "contact"];
+const pageTopics: Topic[] = ["about", "projects", "skills", "contact"];
 
 export default function AppShell({ children }: { children: React.ReactNode }) {
   const [lang, setLang] = useState<Lang>("en");
