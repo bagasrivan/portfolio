@@ -110,12 +110,14 @@ export default function ProjectDetail({ slug }: { slug: string }) {
                     <h2 className={heading}>{labels.summary}</h2>
                     <p className={body}>{t.summary}</p>
                   </section>
+
                   {t.results && (
                     <section>
                       <h2 className={heading}>{labels.results}</h2>
                       <p className={body}>{t.results}</p>
                     </section>
                   )}
+
                   {t.learnings && (
                     <section>
                       <h2 className={heading}>{labels.learnings}</h2>
@@ -128,7 +130,7 @@ export default function ProjectDetail({ slug }: { slug: string }) {
           </LangStack>
         </div>
 
-        {/* Teknologi */}
+        {/* Chip teknologi (tetap ada di bawah) */}
         <div className="mt-10 border-t border-line pt-6">
           <p className="text-xs uppercase tracking-wide text-muted">{c.tech}</p>
           <div className="mt-3 flex flex-wrap gap-2">

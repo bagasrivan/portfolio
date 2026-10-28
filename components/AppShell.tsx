@@ -52,7 +52,6 @@ export default function AppShell({ children }: { children: React.ReactNode }) {
   const router = useRouter();
   const t = content[lang];
 
-  // Samakan atribut lang di <html> dengan bahasa yang dipilih
   useEffect(() => {
     document.documentElement.lang = lang;
   }, [lang]);

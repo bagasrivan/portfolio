@@ -42,15 +42,19 @@ export const projects: Project[] = [
     text: {
       en: {
         description:
-          "A document chatbot that answers questions directly from the contents of a PDF and shows the page each answer came from.",
+          "A chatbot that answers solely from an uploaded PDF, in Indonesian or English, with numbered citations that point to the source page.",
         summary:
-          "A document chatbot that answers questions directly from the contents of a PDF and shows the page each answer came from. The problem: reading long papers, course modules, or reports takes time, and answers from general-purpose chatbots are hard to verify. Simpulkan answers only from the uploaded document and points to the exact pages behind each answer.",
+          "Simpulkan is a question-answering chatbot for PDF documents that answers solely from the uploaded file, whether a paper, a course module, or a report, in Indonesian or English. Its key features include numbered citations that reference the original page and the passage behind each answer, a “not found in the document” response in place of speculative answers, and advanced settings for model, chunk size, and number of retrieved chunks, complete with tooltips. The API key is stored on the server, with limits on file size, page count, and questions per session to protect the quota. The application addresses the need to work through long documents efficiently without losing the ability to verify each answer.",
+        learnings:
+          "A reliable RAG application depends not only on answer quality but also on recognizing the limits of the available information, so the “not found” response and source citations were treated as core features rather than additions. The key is stored on the server and usage is capped per session.",
       },
       id: {
         description:
-          "Chatbot dokumen yang menjawab pertanyaan secara langsung berdasarkan isi file PDF dan menunjukkan halaman sumber dari setiap jawaban.",
+          "Chatbot yang menjawab hanya berdasarkan isi PDF yang diunggah, dalam bahasa Indonesia atau Inggris, disertai sitasi bernomor yang merujuk ke halaman sumber.",
         summary:
-          "Chatbot dokumen yang menjawab pertanyaan secara langsung berdasarkan isi file PDF dan menunjukkan halaman sumber dari setiap jawaban. Permasalahan: Membaca makalah ilmiah, modul perkuliahan, atau laporan yang panjang membutuhkan waktu, sementara jawaban dari chatbot umum sering kali sulit diverifikasi. Simpulkan hanya menghasilkan jawaban berdasarkan dokumen yang diunggah dan menunjukkan nomor halaman secara spesifik sebagai sumber pendukung setiap jawaban.",
+          "Simpulkan adalah chatbot tanya jawab untuk dokumen PDF yang menjawab hanya berdasarkan file yang diunggah, baik makalah, modul perkuliahan, maupun laporan, dalam bahasa Indonesia atau Inggris. Fitur utamanya mencakup sitasi bernomor yang merujuk ke halaman asli dan kutipan di balik setiap jawaban, respons “tidak ditemukan di dokumen” sebagai pengganti jawaban spekulatif, serta pengaturan lanjutan untuk model, ukuran chunk, dan jumlah chunk yang diambil, lengkap dengan tooltip. API key disimpan di sisi server, dengan batasan ukuran file, jumlah halaman, dan jumlah pertanyaan per sesi untuk menjaga kuota. Aplikasi ini menjawab kebutuhan membaca dokumen panjang secara efisien tanpa kehilangan kemampuan memverifikasi setiap jawaban.",
+        learnings:
+          "Aplikasi RAG yang andal tidak hanya bergantung pada kualitas jawaban, tetapi juga pada kemampuan mengenali batas informasi yang tersedia, sehingga respons “tidak ditemukan” dan sitasi sumber dijadikan fitur inti, bukan tambahan. Key disimpan di server dan pemakaian dibatasi per sesi.",
       },
     },
   },
@@ -66,15 +70,19 @@ export const projects: Project[] = [
     text: {
       en: {
         description:
-          "An AI-powered travel assistant that acts as a local guide for South Kalimantan, Indonesia.",
+          "An AI travel assistant that acts as a local guide to South Kalimantan, with Banjar dialect options, tailored itineraries, and a Google Search fact-check mode.",
         summary:
-          "An AI-powered travel assistant that acts as a local guide for South Kalimantan, Indonesia. Users can ask about nature attractions, river and cultural tourism, Banjar cuisine, and souvenirs, and get recommendations and itineraries tailored to their travel style and chosen region.",
+          "Handak Bajalan (Banjar for “want to travel”) is an AI travel assistant that acts as a local guide to South Kalimantan, developed as the final assignment for “LLM-Based Tools and Gemini API Integration for Data Scientists” (Maju Bareng AI with Hacktiv8). Its key features include a selectable language style (thick Banjar, light Banjar, or neutral Indonesian), coverage of 13 regencies and cities with five travel styles, conversation memory that preserves context across follow-up questions, and a fact-check mode that verifies answers through Google Search and displays the sources. The assistant recommends destinations, cuisine, and souvenirs, then builds itineraries around the user’s preferences.",
+        learnings:
+          "Gemini API responses can be slow, and Google Search grounding does not always succeed. A fallback chain handles these failures: the request is retried with grounding, then answered without it, and finally routed to a backup model, so the application keeps responding instead of failing. The project also showed the importance of prompt structure: separating dialect, expertise, answer format, anti-hallucination rules, and topic limits makes the assistant’s behavior far easier to control.",
       },
       id: {
         description:
-          "Asisten perjalanan berbasis AI yang berperan sebagai pemandu wisata lokal Kalimantan Selatan, Indonesia.",
+          "Asisten perjalanan berbasis AI yang berperan sebagai pemandu lokal Kalimantan Selatan, dengan pilihan logat Banjar, rencana perjalanan yang disesuaikan, dan mode cek fakta melalui Google Search.",
         summary:
-          "Asisten perjalanan berbasis AI yang berperan sebagai pemandu wisata lokal Kalimantan Selatan, Indonesia. Pengguna dapat bertanya tentang destinasi wisata alam, wisata sungai dan budaya, kuliner khas Banjar, serta oleh-oleh khas daerah. Asisten ini memberikan rekomendasi dan menyusun rencana perjalanan yang disesuaikan dengan gaya berwisata dan wilayah pilihan pengguna.",
+          "Handak Bajalan (bahasa Banjar untuk “ingin bepergian”) adalah asisten perjalanan berbasis AI yang berperan sebagai pemandu lokal Kalimantan Selatan, dikembangkan sebagai tugas akhir kelas “LLM-Based Tools and Gemini API Integration for Data Scientists” (Maju Bareng AI bersama Hacktiv8). Fitur utamanya mencakup pilihan gaya bahasa (Banjar kental, Banjar ringan, atau Indonesia netral), cakupan 13 kabupaten dan kota dengan lima gaya berlibur, memori percakapan yang menjaga konteks pada pertanyaan lanjutan, serta mode cek fakta yang memverifikasi jawaban melalui Google Search dan menampilkan sumbernya. Asisten ini merekomendasikan destinasi, kuliner, dan oleh-oleh, lalu menyusun rencana perjalanan sesuai preferensi pengguna.",
+        learnings:
+          "Respons Gemini API dapat lambat, dan grounding Google Search tidak selalu berhasil. Rantai cadangan menangani kegagalan tersebut: permintaan dicoba ulang dengan grounding, kemudian dijawab tanpa grounding, dan terakhir dialihkan ke model cadangan, sehingga aplikasi tetap merespons dan tidak langsung gagal. Proyek ini juga menunjukkan pentingnya struktur prompt: pemisahan logat, keahlian, format jawaban, aturan anti-halusinasi, dan batasan topik membuat perilaku asisten jauh lebih mudah dikendalikan.",
       },
     },
   },
@@ -95,15 +103,19 @@ export const projects: Project[] = [
     text: {
       en: {
         description:
-          "This research explores the robustness and computational efficiency of two CNN architectures, ResNet50 and MobileNetV3-Large, for multiclass face mask classification under controlled environmental variations.",
+          "A comparison of ResNet50 and MobileNetV3-Large for face mask classification under varying environmental conditions, weighing robustness against computational efficiency. Published in a SINTA 2 journal.",
         summary:
-          "This research explores the robustness and computational efficiency of two CNN architectures, ResNet50 and MobileNetV3-Large, for multiclass face mask classification under controlled environmental variations.",
+          "This research examines the robustness and computational efficiency of two CNN architectures, ResNet50 and MobileNetV3-Large, for multi-class face mask classification under controlled environmental variations. Both models were trained with transfer learning and compared on accuracy and computational efficiency to examine the trade-off between a heavy architecture and a lightweight one designed for resource-limited devices. The results were published in the Journal of Embedded System Security and Intelligent Systems (JESSI), a SINTA 2 accredited journal, in June 2026.",
+        learnings:
+          "Testing under controlled environmental variations requires a consistent experimental design so that comparisons between models remain fair. The research also reinforced that a model’s readiness should not be judged by accuracy alone: robustness to changing conditions and computational efficiency matter, especially for deployment on resource-limited devices.",
       },
       id: {
         description:
-          "Penelitian ini mengeksplorasi ketahanan dan efisiensi komputasi dua arsitektur CNN, yaitu ResNet50 dan MobileNetV3-Large, dalam melakukan klasifikasi masker wajah multikelas pada berbagai variasi lingkungan yang terkontrol.",
+          "Perbandingan ResNet50 dan MobileNetV3-Large untuk klasifikasi masker wajah pada kondisi lingkungan yang bervariasi, menimbang ketahanan model terhadap efisiensi komputasi. Terbit di jurnal SINTA 2.",
         summary:
-          "Penelitian ini mengeksplorasi ketahanan dan efisiensi komputasi dua arsitektur CNN, yaitu ResNet50 dan MobileNetV3-Large, dalam melakukan klasifikasi masker wajah multikelas pada berbagai variasi lingkungan yang terkontrol.",
+          "Penelitian ini mengkaji ketahanan dan efisiensi komputasi dua arsitektur CNN, yaitu ResNet50 dan MobileNetV3-Large, dalam klasifikasi masker wajah multikelas pada berbagai variasi lingkungan yang terkontrol. Kedua model dilatih dengan transfer learning dan dibandingkan dari sisi akurasi serta efisiensi komputasi untuk melihat trade-off antara arsitektur berat dan arsitektur ringan yang dirancang untuk perangkat dengan sumber daya terbatas. Hasilnya dipublikasikan di Journal of Embedded System Security and Intelligent Systems (JESSI), jurnal terakreditasi SINTA 2, pada Juni 2026.",
+        learnings:
+          "Pengujian pada variasi lingkungan yang terkontrol menuntut desain eksperimen yang konsisten agar perbandingan antarmodel tetap adil. Penelitian ini juga menegaskan bahwa kesiapan sebuah model tidak cukup dinilai dari akurasi saja: ketahanan terhadap perubahan kondisi dan efisiensi komputasi perlu dipertimbangkan, terutama untuk penggunaan di perangkat dengan sumber daya terbatas.",
       },
     },
   },
@@ -114,19 +126,23 @@ export const projects: Project[] = [
     category: "Software Engineering",
     image: "/projects/SiBisa.jpg",
     repoUrl: "https://github.com/bagasrivan/BMKG-Inventory-App",
-    tech: ["Flutter", "Dart", "REST API"],
+    tech: ["Flutter", "Dart", "Figma", "REST API"],
     text: {
       en: {
         description:
-          "Fullstack inventory and monitoring app built with Flutter for Android and iOS, with REST API integration.",
+          "Flutter-based inventory and monitoring app that digitizes how BMKG records and tracks its items, developed end to end during an internship for Android and iOS.",
         summary:
-          "SiBisa is a fullstack inventory and monitoring application built during an internship at BMKG Syamsudin Noor. It runs on Android and iOS with Flutter, integrates with a REST API.",
+          "SiBisa (Stamet Banjarmasin Inventory System) is a mobile application that digitizes how BMKG records, monitors, and manages its inventory items, developed end to end (frontend and backend) during an internship at BMKG Syamsudin Noor, from interface design through to a working Flutter application. It runs on Android and iOS from a single codebase and uses Provider for state management, named-route navigation with Hero transitions, and forms for data entry. REST API integration (GET, POST, PUT) manages large-scale data, including meteorological, climatological, and geophysical data, displayed accurately and real time.",
+        learnings:
+          "Displaying large-scale data accurately and real time requires tidy state management and API calls so the interface stays responsive. Handling frontend and backend together also strengthened the ability to join interface design and data integration in a single workflow, while keeping the app running smoothly on both Android and iOS.",
       },
       id: {
         description:
-          "Aplikasi inventaris dan monitoring fullstack berbasis Flutter untuk Android dan iOS, dengan integrasi REST API.",
+          "Aplikasi inventaris dan monitoring berbasis Flutter yang mendigitalkan pencatatan dan pelacakan barang di BMKG, dikembangkan secara end-to-end selama magang untuk Android dan iOS.",
         summary:
-          "SiBisa adalah aplikasi inventaris dan monitoring fullstack yang dibuat saat magang di BMKG Syamsudin Noor. Aplikasi ini berjalan di Android dan iOS dengan Flutter, terintegrasi dengan REST API.",
+          "SiBisa (Stamet Banjarmasin Inventory System) adalah aplikasi mobile yang mendigitalkan pencatatan, pemantauan, dan pengelolaan barang inventaris di BMKG, dikembangkan secara end-to-end (frontend dan backend) selama magang di BMKG Syamsudin Noor, mulai dari perancangan antarmuka hingga menjadi aplikasi Flutter yang berfungsi. Aplikasi berjalan di Android dan iOS dari satu codebase, dengan Provider untuk state management, navigasi named route dengan animasi Hero, serta form untuk input data. Integrasi REST API (GET, POST, PUT) digunakan untuk mengelola data berskala besar, termasuk data meteorologi, klimatologi, dan geofisika, yang ditampilkan secara akurat dan real time.",
+        learnings:
+          "Menampilkan data berskala besar secara akurat dan real time menuntut pengelolaan state dan pemanggilan API yang rapi agar tampilan tetap responsif. Mengerjakan frontend dan backend sekaligus juga melatih kemampuan menyatukan perancangan antarmuka dan integrasi data dalam satu alur pengembangan, kemudian memastikan aplikasi berjalan mulus di Android maupun iOS.",
       },
     },
   },
@@ -141,15 +157,19 @@ export const projects: Project[] = [
     text: {
       en: {
         description:
-          "Bangkit Academy capstone project that detects face shape and recommends matching hairstyles.",
+          "Bangkit Academy capstone app that detects face shape from a photo and recommends suitable hairstyles, with cloud and machine learning API integration on the Android side.",
         summary:
-          "HairLab detects the user’s face shape and recommends matching hairstyles. As the backend android developer, I connected the mobile app to cloud APIs and machine learning models.",
+          "HairLab is a Bangkit Academy capstone project: an Android application that identifies a user’s face shape from an uploaded photo and recommends suitable hairstyles. The main contribution focused on integration, connecting the app with cloud services and machine learning APIs so that photos, predictions, and recommendations move smoothly between the app and the models. The foundation came from the Bangkit Mobile Development cohort, from Material Design and Room to Retrofit, OkHttp, and Coroutines.",
+        learnings:
+          "Connecting an Android app to cloud services and machine learning APIs requires handling photo uploads and prediction responses asynchronously so the app stays responsive. As a team capstone, the project also built practice in aligning data formats between the mobile, cloud, and machine learning sides so that communication between services runs smoothly.",
       },
       id: {
         description:
-          "Proyek capstone Bangkit Academy yang mendeteksi bentuk wajah dan merekomendasikan gaya rambut yang cocok.",
+          "Aplikasi capstone Bangkit Academy yang mengenali bentuk wajah dari foto dan merekomendasikan gaya rambut yang sesuai, dengan integrasi API cloud dan machine learning di sisi Android.",
         summary:
-          "HairLab mendeteksi bentuk wajah pengguna dan merekomendasikan gaya rambut yang cocok. Sebagai backend android developer, saya menghubungkan aplikasi mobile dengan API cloud dan model machine learning.",
+          "HairLab adalah proyek capstone Bangkit Academy berupa aplikasi Android yang mengenali bentuk wajah dari foto yang diunggah pengguna, lalu merekomendasikan gaya rambut yang sesuai. Kontribusi utama berfokus pada integrasi, yaitu menghubungkan aplikasi dengan layanan cloud dan API machine learning agar foto, hasil prediksi, dan rekomendasi dapat berpindah dengan lancar antara aplikasi dan model. Fondasinya berasal dari kelas Mobile Development Bangkit, mulai dari Material Design dan Room hingga Retrofit, OkHttp, dan Coroutines.",
+        learnings:
+          "Menghubungkan aplikasi Android dengan layanan cloud dan API machine learning menuntut pengelolaan unggahan foto dan respons prediksi secara asinkron agar aplikasi tetap responsif. Sebagai capstone tim, proyek ini juga melatih penyelarasan format data antara sisi mobile, cloud, dan machine learning agar komunikasi antar layanan berjalan lancar.",
       },
     },
   },
@@ -180,8 +200,8 @@ export const projectsContent: Record<
     title: "All Projects",
     all: "All",
     categories: {
-      "Software Engineering": "Mobile",
-      "AI/ML/Data": "AI & ML",
+      "Software Engineering": "Mobile Application",
+      "AI/ML/Data": "AI/ML/Data",
       Publication: "Publication",
     },
     more: "Read more",
@@ -197,17 +217,17 @@ export const projectsContent: Record<
     empty: "No projects in this category yet.",
   },
   id: {
-    eyebrow: "Project",
-    title: "Semua Project",
+    eyebrow: "Proyek",
+    title: "Semua Proyek",
     all: "Semua",
     categories: {
-      "Software Engineering": "Mobile",
-      "AI/ML/Data": "AI & ML",
+      "Software Engineering": "Aplikasi Mobile",
+      "AI/ML/Data": "AI/ML/Data",
       Publication: "Publikasi",
     },
     more: "Selengkapnya",
     visit: "Lihat halaman",
-    code: "Kode sumber",
+    code: "Kode",
     back: "Project",
     summary: "Ringkasan",
     tech: "Teknologi",

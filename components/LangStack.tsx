@@ -6,7 +6,6 @@ import type { Lang } from "@/lib/content";
 
 const LANGS: Lang[] = ["en", "id"];
 
-// Merender kedua bahasa di sel grid yang sama, hanya satu yang terlihat.
 export default function LangStack({
   children,
 }: {
