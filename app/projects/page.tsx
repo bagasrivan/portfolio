@@ -6,19 +6,13 @@ import Link from "next/link";
 import { useApp } from "@/components/AppShell";
 import LangStack from "@/components/LangStack";
 import { Icon } from "@/components/ui";
+import { iconPaths } from "@/lib/icons";
 import {
   projects,
   projectsContent,
   type Category,
   type Project,
 } from "@/lib/projects";
-
-export const iconPaths = {
-  arrowRight: "M5 12h14M12 5l7 7-7 7",
-  globe:
-    "M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20zM2 12h20M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z",
-  lock: "M5 11h14a2 2 0 0 1 2 2v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-7a2 2 0 0 1 2-2zM7 11V7a5 5 0 0 1 10 0v4",
-};
 
 const MAX_TECH = 4;
 
@@ -59,16 +53,19 @@ function ProjectCard({ p }: { p: Project }) {
           {p.title}
         </h2>
 
-        <LangStack>
-          {(l) => (
-            <p className="mt-2 text-sm leading-relaxed text-muted">
-              {p.text[l].description}
-            </p>
-          )}
-        </LangStack>
+        {/* flex-1: deskripsi menyerap sisa ruang, jadi chip & footer selalu di bawah */}
+        <div className="flex-1">
+          <LangStack>
+            {(l) => (
+              <p className="mt-2 line-clamp-4 text-sm leading-relaxed text-muted">
+                {p.text[l].description}
+              </p>
+            )}
+          </LangStack>
+        </div>
 
-        {/* Chip teknologi; +N menampilkan sisanya saat di-hover */}
-        <div className="relative z-10 mt-4 flex flex-wrap items-center gap-2">
+        {/* Chip teknologi: tinggi minimum 2 baris, content-start supaya baris tidak melar */}
+        <div className="relative z-10 mt-4 flex min-h-[3.75rem] flex-wrap content-start items-center gap-2">
           {shown.map((t) => (
             <span
               key={t}
@@ -93,7 +90,8 @@ function ProjectCard({ p }: { p: Project }) {
         </div>
 
         {/* Footer kartu */}
-        <div className="mt-auto flex items-center justify-between border-t border-line pt-4 mt-5">
+        <div className="mt-5 flex min-h-9 items-center justify-between border-t border-line pt-4">
+          {" "}
           {/* Tautan ini "diregangkan" supaya seluruh kartu bisa diklik */}
           <Link
             href={`/projects/${p.slug}`}
@@ -105,7 +103,6 @@ function ProjectCard({ p }: { p: Project }) {
               className="h-4 w-4 transition-transform duration-200 group-hover:translate-x-1"
             />
           </Link>
-
           {p.liveUrl && (
             <a
               href={p.liveUrl}
@@ -131,7 +128,9 @@ export default function ProjectsPage() {
   // Hanya tampilkan kategori yang memang punya project
   const categories = Array.from(new Set(projects.map((p) => p.category)));
   const list =
-    category === "all" ? projects : projects.filter((p) => p.category === category);
+    category === "all"
+      ? projects
+      : projects.filter((p) => p.category === category);
 
   const pill =
     "rounded-full border px-4 py-1.5 text-sm transition-colors duration-200";

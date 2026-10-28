@@ -45,8 +45,8 @@ export default function AppShell({ children }: { children: React.ReactNode }) {
   const [thinking, setThinking] = useState(false);
   const [typedCount, setTypedCount] = useState(0);
   const [activeTopic, setActiveTopic] = useState<Topic | null>(null);
-  const [menuOpen, setMenuOpen] = useState(false); // sidebar di HP
-  const [collapsed, setCollapsed] = useState(false); // sidebar di desktop
+  const [menuOpen, setMenuOpen] = useState(false); 
+  const [collapsed, setCollapsed] = useState(false); 
   const timerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
   const pathname = usePathname();
   const router = useRouter();
