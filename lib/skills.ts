@@ -60,6 +60,8 @@ export const skillsContent: Record<
   {
     eyebrow: string;
     title: string;
+    tools: string;
+    certification: string;
     comfort: string;
     familiar: string;
   }
@@ -69,11 +71,73 @@ export const skillsContent: Record<
     title: "Things I work with",
     comfort: "Comfort",
     familiar: "Familiar",
+    tools: "Tools",
+    certification: "Certifications",
   },
   id: {
     eyebrow: "Skill",
     title: "Teknologi yang saya gunakan",
     comfort: "Keahlian utama",
     familiar: "Pernah digunakan",
+    tools: "Tools",
+    certification: "Sertifikasi",
   },
 };
+
+export type Certificate = {
+  id: string;
+  title: string;
+  issuer?: string;
+  image: string;
+};
+
+export const certificates: Certificate[] = [
+  {
+    id: "applied-machine-learning-for-android-developer",
+    title: "Belajar Penerapan Machine Learning untuk Android",
+    image: "/certificates/Belajar Penerapan Machine Learning untuk Android.jpg",
+  },
+  {
+    id: "introduction-to-ai",
+    title: "Belajar Dasar AI",
+    image: "/certificates/Belajar Dasar AI.jpg",
+  },
+  {
+    id: "fundamental-android",
+    title: "Belajar Fundamental Aplikasi Android",
+    image: "/certificates/Belajar Fundamental Aplikasi Android.jpg",
+  },
+  {
+    id: "android-for-beginner",
+    title: "Belajar Membuat Aplikasi Android untuk Pemula",
+    image: "/certificates/Belajar Membuat Aplikasi Android untuk Pemula.jpg",
+  },
+  {
+    id: "kotlin-basic-programming",
+    title: "Memulai Pemrograman dengan Kotlin",
+    image: "/certificates/Memulai Pemrograman dengan Kotlin.jpg",
+  },
+  {
+    id: "introduction-to-programming-logic",
+    title: "Pengenalan ke Logika Pemrograman (Programming Logic 101)",
+    image:
+      "/certificates/Pengenalan ke Logika Pemrograman (Programming Logic 101).jpg",
+  },
+  {
+    id: "basic-programming-become-software-developer",
+    title: "Memulai Dasar Pemrograman Untuk Menjadi Pengembang Software",
+    image:
+      "/certificates/Memulai Dasar Pemrograman Untuk Menjadi Pengembang Software.jpg",
+  },
+  {
+    id: "cloud-ractitioner-essentials",
+    title: "Cloud Practitioner Essentials (Belajar Dasar AWS Cloud)",
+    image:
+      "/certificates/Cloud Practitioner Essentials (Belajar Dasar AWS Cloud).jpg",
+  },
+  {
+    id: "web-programming",
+    title: "Basic Web Programming",
+    image: "/certificates/Belajar Dasar Pemrograman Web.jpg",
+  },
+];
