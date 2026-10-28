@@ -19,7 +19,6 @@ export const metadata: Metadata = {
   twitter: { card: "summary_large_image" },
 };
 
-// Dijalankan sebelum halaman tampil: pakai pilihan tersimpan, kalau belum ada ikuti sistem
 const themeScript = `(function(){try{var t=localStorage.getItem("theme");if(!t){t=window.matchMedia("(prefers-color-scheme: dark)").matches?"dark":"light"}document.documentElement.dataset.theme=t}catch(e){}})();`;
 
 export default function RootLayout({
