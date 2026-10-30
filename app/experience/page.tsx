@@ -20,7 +20,6 @@ const GROUP_ICON: Record<Group, string> = {
 };
 
 const GROUPS: Group[] = ["work", "social"];
-const MAX_TAGS = 6;
 
 function ExperienceCard({
   e,
