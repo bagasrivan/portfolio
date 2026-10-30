@@ -8,13 +8,13 @@ export const contactContent: Record<
     eyebrow: "Contact",
     title: "Let’s connect!",
     description:
-      "I’m open to AI Engineer opportunities, collaborations, and conversations about AI and technologies. Reach out through any of the links below.",
+      "I’m open to AI/ML Engineer opportunities, collaborations, and conversations about AI and technologies. Reach out through any of the links below.",
   },
   id: {
     eyebrow: "Kontak",
     title: "Hubungi saya!",
     description:
-      "Saya terbuka untuk peluang sebagai AI Engineer, kolaborasi, serta diskusi tentang AI dan teknologi. Hubungi saya melalui salah satu tautan di bawah ",
+      "Saya terbuka untuk peluang sebagai AI/ML Engineer, kolaborasi, serta diskusi tentang AI dan teknologi. Hubungi saya melalui salah satu tautan di bawah ",
   },
 };
 
