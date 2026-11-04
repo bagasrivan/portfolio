@@ -7,73 +7,6 @@ export const topics: Topic[] = [
   "contact",
 ];
 
-// Kata kunci untuk mencocokkan pertanyaan yang diketik bebas
-export const keywords: Record<Topic, string[]> = {
-  about: [
-    "about",
-    "who",
-    "siapa",
-    "tentang",
-    "perkenalan",
-    "introduce",
-    "education",
-    "pendidikan",
-    "kuliah",
-    "study",
-    "gpa",
-    "ipk",
-  ],
-  projects: [
-    "project",
-    "proyek",
-    "karya",
-    "built",
-    "aplikasi",
-    "app",
-    "thesis",
-    "skripsi",
-    "journal",
-    "jurnal",
-    "research",
-    "riset",
-  ],
-  experience: [
-    "experience",
-    "pengalaman",
-    "work",
-    "kerja",
-    "intern",
-    "magang",
-    "career",
-    "himakom",
-    "organisasi",
-    "organization",
-  ],
-  skills: [
-    "skill",
-    "keahlian",
-    "tech",
-    "stack",
-    "programming",
-    "python",
-    "flutter",
-    "certificate",
-    "sertifikat",
-    "tools",
-    "database",
-  ],
-  contact: [
-    "contact",
-    "kontak",
-    "email",
-    "hire",
-    "hubungi",
-    "reach",
-    "github",
-    "linkedin",
-  ],
-};
-
 export const content = {
   en: {
     greeting: "Bagaskara Ridho Vandio",
@@ -154,4 +87,5 @@ export const content = {
 export type Lang = keyof typeof content;
 export type Message =
   | { role: "user"; text: string }
-  | { role: "bot"; topic: Topic | "fallback" };
+  | { role: "bot"; topic: Topic | "fallback" }
+  | { role: "bot"; text: string };

@@ -12,7 +12,6 @@ import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
 import {
   content,
-  keywords,
   topics,
   type Lang,
   type Message,
@@ -37,7 +36,13 @@ export function useApp() {
   if (!ctx) throw new Error("useApp harus dipakai di dalam <AppShell>");
   return ctx;
 }
-const pageTopics: Topic[] = ["about", "projects", "experience", "skills", "contact"];
+const pageTopics: Topic[] = [
+  "about",
+  "projects",
+  "experience",
+  "skills",
+  "contact",
+];
 
 export default function AppShell({ children }: { children: React.ReactNode }) {
   const [lang, setLang] = useState<Lang>("en");
@@ -45,8 +50,8 @@ export default function AppShell({ children }: { children: React.ReactNode }) {
   const [thinking, setThinking] = useState(false);
   const [typedCount, setTypedCount] = useState(0);
   const [activeTopic, setActiveTopic] = useState<Topic | null>(null);
-  const [menuOpen, setMenuOpen] = useState(false); 
-  const [collapsed, setCollapsed] = useState(false); 
+  const [menuOpen, setMenuOpen] = useState(false);
+  const [collapsed, setCollapsed] = useState(false);
   const timerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
   const pathname = usePathname();
   const router = useRouter();
@@ -56,15 +61,12 @@ export default function AppShell({ children }: { children: React.ReactNode }) {
     document.documentElement.lang = lang;
   }, [lang]);
 
-  // Batalkan timer yang masih berjalan kalau halaman ditutup
   useEffect(() => {
     return () => {
       if (timerRef.current) clearTimeout(timerRef.current);
     };
   }, []);
 
-  // Menandai jawaban yang sudah selesai diketik, supaya tidak diketik ulang
-  // saat kembali ke halaman chat
   const markTyped = useCallback((index: number) => {
     setTypedCount((c) => Math.max(c, index + 1));
   }, []);
@@ -73,19 +75,73 @@ export default function AppShell({ children }: { children: React.ReactNode }) {
     if (thinking) return;
     setMenuOpen(false);
     if (pathname !== "/") router.push("/");
-    const q = text.toLowerCase();
-    const found =
-      topic ?? topics.find((tp) => keywords[tp].some((k) => q.includes(k)));
-    setActiveTopic(found ?? null);
-    setMessages((prev) => [...prev, { role: "user", text }]);
+
+    setActiveTopic(topic ?? null);
+
+    const userMsg: Message = { role: "user", text };
+    setMessages((prev) => [...prev, userMsg]);
     setThinking(true);
-    timerRef.current = setTimeout(() => {
-      setMessages((prev) => [
-        ...prev,
-        { role: "bot", topic: found ?? "fallback" },
-      ]);
+
+    if (topic) {
+      timerRef.current = setTimeout(() => {
+        setMessages((prev) => [...prev, { role: "bot", topic }]);
+        setThinking(false);
+      }, 700);
+      return;
+    }
+
+    void askGemini([...messages, userMsg]);
+  }
+
+  async function askGemini(history: Message[]) {
+    const payload = history.flatMap((m) => {
+      if (m.role === "user") return [{ role: "user", content: m.text }];
+      if ("text" in m) return [{ role: "assistant", content: m.text }];
+      if (m.topic !== "fallback")
+        return [{ role: "assistant", content: t.answers[m.topic] }];
+      return [];
+    });
+
+    try {
+      const res = await fetch("/api/chat", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ messages: payload, lang }),
+      });
+      if (!res.ok || !res.body) throw new Error(`HTTP ${res.status}`);
+
+      const reader = res.body.getReader();
+      const decoder = new TextDecoder();
+      const botIndex = history.length; // posisi pesan bot ini
+      let full = "";
+      let started = false;
+
+      while (true) {
+        const { done, value } = await reader.read();
+        if (done) break;
+        full += decoder.decode(value, { stream: true });
+        const snapshot = full; // salinan tetap untuk dipakai di callback
+
+        if (!started) {
+          started = true;
+          markTyped(botIndex); // jangan animasi ketik ulang
+          setThinking(false);
+          setMessages((prev) => [...prev, { role: "bot", text: snapshot }]);
+        } else {
+          setMessages((prev) => {
+            const copy = [...prev];
+            copy[copy.length - 1] = { role: "bot", text: snapshot };
+            return copy;
+          });
+        }
+      }
+      if (!started) throw new Error("Respons kosong");
+    } catch (err) {
+      console.error("[chat] gagal:", err);
+      setMessages((prev) => [...prev, { role: "bot", topic: "fallback" }]);
+    } finally {
       setThinking(false);
-    }, 700);
+    }
   }
 
   function newChat() {

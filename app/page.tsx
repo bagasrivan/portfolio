@@ -2,7 +2,6 @@
 
 import { useCallback, useEffect, useRef, useState } from "react";
 import { Avatar } from "@/components/ui";
-import { topics } from "@/lib/content";
 import { useApp } from "@/components/AppShell";
 
 // Mengubah email dan alamat web di dalam teks menjadi link yang bisa diklik
@@ -108,8 +107,12 @@ export default function Home() {
                   </div>
                 );
               }
-              const botText =
-                m.topic === "fallback" ? t.fallback : t.answers[m.topic];
+              const isAi = "text" in m;
+              const botText = isAi
+                ? m.text
+                : m.topic === "fallback"
+                  ? t.fallback
+                  : t.answers[m.topic];
               return (
                 <div
                   key={i}
@@ -118,9 +121,11 @@ export default function Home() {
                   <Avatar className="mt-1 h-7 w-7" />
                   <div className="whitespace-pre-line py-1 leading-relaxed text-ink">
                     <TypingText
-                      key={botText}
+                      key={isAi ? `ai-${i}` : botText}
                       text={botText}
-                      animate={i === messages.length - 1 && i >= typedCount}
+                      animate={
+                        !isAi && i === messages.length - 1 && i >= typedCount
+                      }
                       onTick={scrollToBottom}
                       onDone={() => markTyped(i)}
                     />
@@ -188,21 +193,6 @@ export default function Home() {
           </button>
         </div>
       </form>
-
-      {/* Chip pertanyaan cepat (hanya di layar sapaan) */}
-      {!hasMessages && (
-        <div className="mx-auto mt-5 flex max-w-2xl flex-wrap justify-center gap-2 px-4">
-          {topics.map((tp) => (
-            <button
-              key={tp}
-              onClick={() => ask(t.questions[tp], tp)}
-              className="rounded-full border border-line bg-surface px-4 py-2 text-sm text-ink transition hover:-translate-y-0.5 hover:bg-soft hover:shadow-sm"
-            >
-              {t.questions[tp]}
-            </button>
-          ))}
-        </div>
-      )}
     </div>
   );
 }
