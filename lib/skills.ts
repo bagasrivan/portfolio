@@ -93,6 +93,11 @@ export type Certificate = {
 
 export const certificates: Certificate[] = [
   {
+    id: "spec-driven-devel`opment-with-kiro",
+    title: "Spec-Driven Development with Kiro",
+    image: "/certificates/Spec-Driven Development with Kiro.jpg",
+  },
+  {
     id: "build-an-ai-agent-creedyly",
     title: "Build an AI Agent Creedly",
     image: "/certificates/Build an AI Agent Creedly.jpg",
