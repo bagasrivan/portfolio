@@ -1,36 +1,13 @@
+
 "use client";
 
 import { useCallback, useEffect, useRef, useState } from "react";
+import ReactMarkdown from "react-markdown";
+import remarkGfm from "remark-gfm";
 import { Avatar } from "@/components/ui";
 import { useApp } from "@/components/AppShell";
 
-// Mengubah email dan alamat web di dalam teks menjadi link yang bisa diklik
-const linkPattern =
-  /([\w.+-]+@[\w-]+\.[\w.]+|(?:https?:\/\/)?(?:[\w-]+\.)+[a-z]{2,}\/[\w\-./]*)/gi;
-
-function linkify(text: string) {
-  return text.split(linkPattern).map((part, i) => {
-    if (i % 2 === 0) return part; // bagian teks biasa
-    const href = part.includes("@")
-      ? `mailto:${part}`
-      : part.startsWith("http")
-        ? part
-        : `https://${part}`;
-    return (
-      <a
-        key={i}
-        href={href}
-        target="_blank"
-        rel="noopener noreferrer"
-        className="text-accent underline underline-offset-2 hover:opacity-80"
-      >
-        {part}
-      </a>
-    );
-  });
-}
-
-// Menampilkan teks huruf demi huruf (efek mengetik)
+// Menampilkan teks dengan format Markdown dan efek mengetik
 function TypingText({
   text,
   animate,
@@ -44,24 +21,49 @@ function TypingText({
 }) {
   const [count, setCount] = useState(0);
 
-  // Tambah 2 huruf setiap 15 milidetik sampai teks habis
+  // Efek mengetik
   useEffect(() => {
     if (!animate || count >= text.length) return;
-    const id = setTimeout(() => setCount((c) => c + 2), 15);
+
+    const id = setTimeout(
+      () => setCount((c) => Math.min(c + 2, text.length)),
+      15
+    );
+
     return () => clearTimeout(id);
   }, [count, text, animate]);
 
-  // Setiap ada huruf baru, minta layar scroll ke bawah
+  // Auto-scroll ketika teks bertambah
   useEffect(() => {
     onTick();
   }, [count, onTick]);
 
-  // Setelah selesai, beri tahu induk supaya tidak diketik ulang
+  // Menandai ketika animasi selesai
   useEffect(() => {
     if (animate && count >= text.length) onDone();
   }, [animate, count, text, onDone]);
 
-  return <>{linkify(animate ? text.slice(0, count) : text)}</>;
+  const displayedText = animate ? text.slice(0, count) : text;
+
+  return (
+    <ReactMarkdown
+      remarkPlugins={[remarkGfm]}
+      components={{
+        a: ({ href, children }) => (
+          <a
+            href={href}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-accent underline underline-offset-2 hover:opacity-80"
+          >
+            {children}
+          </a>
+        ),
+      }}
+    >
+      {displayedText}
+    </ReactMarkdown>
+  );
 }
 
 export default function Home() {
@@ -107,19 +109,22 @@ export default function Home() {
                   </div>
                 );
               }
+
               const isAi = "text" in m;
               const botText = isAi
                 ? m.text
                 : m.topic === "fallback"
                   ? t.fallback
                   : t.answers[m.topic];
+
               return (
                 <div
                   key={i}
                   className="fade-up flex max-w-[85%] items-start gap-3"
                 >
                   <Avatar className="mt-1 h-7 w-7" />
-                  <div className="whitespace-pre-line py-1 leading-relaxed text-ink">
+
+                  <div className="py-1 leading-relaxed text-ink break-words [&_p]:mb-2 [&_p:last-child]:mb-0 [&_strong]:font-bold [&_ul]:my-2 [&_ul]:list-disc [&_ul]:pl-5 [&_ol]:my-2 [&_ol]:list-decimal [&_ol]:pl-5 [&_li]:my-1 [&_a]:text-accent [&_code]:rounded [&_code]:bg-soft [&_code]:px-1">
                     <TypingText
                       key={isAi ? `ai-${i}` : botText}
                       text={botText}
@@ -144,6 +149,7 @@ export default function Home() {
                 </div>
               </div>
             )}
+
             <div ref={bottomRef} />
           </div>
         </div>
@@ -158,7 +164,7 @@ export default function Home() {
         </div>
       )}
 
-      {/* Kotak input (posisinya tetap di pohon yang sama, jadi fokus tidak hilang) */}
+      {/* Kotak input */}
       <form
         onSubmit={handleSend}
         className={`mx-auto w-full px-4 ${
@@ -172,6 +178,7 @@ export default function Home() {
             className="flex-1 bg-transparent px-2 text-ink outline-none placeholder:text-muted"
             placeholder={t.placeholder}
           />
+
           <button
             type="submit"
             disabled={!input.trim()}
