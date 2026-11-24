@@ -2,11 +2,11 @@ import { experiences, committees } from "@/lib/experience";
 import { projects } from "@/lib/projects";
 
 const PROFILE = `
-Name: Bagaskara Ridho Vandio. Based in Bekasi, Indonesia.
+Name: Bagaskara Ridho Vandio. Based in Banjarbaru, Indonesia.
 Education: Bachelor of Computer Science (Data Science concentration), Universitas Lambung Mangkurat, 2022-2026, GPA 3.64/4.00.
 Thesis: Performance Analysis of ResNet50 and MobileNetV3 Models under Environmental Variations for Multi-Class Face Mask Classification using Transfer Learning.
 Publication: "Evaluating CNN Robustness for Face Mask Classification under Environmental Variations", published in JESSI, a SINTA 2 journal (June 2026).
-Goal: building a career as an AI Engineer.
+Goal: building a career as an Software & AI Engineer.
 Skills: Python, Java, JavaScript, SQL, Kotlin, Dart; Flutter, Pandas, NumPy, Scikit-learn, TensorFlow/Keras; MySQL; Git, GitHub, REST API integration, model deployment and evaluation; Android Studio, Jupyter, Google Colab, RunPod, Postman.
 Certificates: Introduction to Large Language Models, Python Basic Programming, Junior Office Operator, Flutter for Beginner, Dart Basic Programming, Applied Machine Learning for Android Developer, Introduction to AI, Fundamental Android, Android for Beginner, Cloud Practitioner Essentials (AWS).
 Languages: Indonesian, English.
