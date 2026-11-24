@@ -44,7 +44,7 @@ export default function Image() {
           color: "#6b6860",
         }}
       >
-        AI/ML Engineer
+        Software & AI Engineer
       </div>
       <div
         style={{

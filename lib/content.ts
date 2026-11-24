@@ -14,7 +14,7 @@ export const content = {
     placeholder: "Ask me anything...",
     send: "Send",
     cv: "Download Resume",
-    role: "AI/ML Engineer",
+    role: "Software & AI Dev",
     newChat: "New chat",
     labels: {
       about: "About Me",
@@ -51,7 +51,7 @@ export const content = {
     placeholder: "Tanyakan sesuatu...",
     send: "Kirim",
     cv: "Unduh Resume",
-    role: "AI/ML Engineer",
+    role: "Software & AI Dev",
     newChat: "Percakapan baru",
     labels: {
       about: "Tentang Saya",

@@ -36,7 +36,7 @@ export const aboutContent: Record<Lang, AboutText> = {
     eyebrow: "About me",
     title: "Hi, I’m Bagaskara",
     paragraphs: [
-      "I'm a Computer Science graduate specializing in Data Science, with a strong interest in Artificial Intelligence, Machine Learning, Deep Learning, and Large Language Models (LLMs). My work combines machine learning research with practical software development, including mobile applications and API integration. I have published SINTA 2 research and have hands-on experience with Python, TensorFlow, PyTorch, Langflow, LLMs, Next.js, React.js, Flutter and other technologies. I'm passionate about building intelligent, reliable, and impactful technology solutions, with a goal of growing as an AI Engineer and turning research and ideas into real-world applications.",
+      "Computer Science graduate passionate about Software Development and Artificial Intelligence. Enjoys exploring new technologies and building applications, ranging from AI-powered solutions to mobile and web applications. Experienced in Machine Learning, Deep Learning, and Large Language Models (LLMs), along with mobile and web development, API integration, and Software Engineering. Technical skills include Python, TensorFlow, PyTorch, Langflow, Flutter, Dart, Java, JavaScript, React.js, Next.js, and more.",
     ],
     education: {
       label: "Education",
@@ -46,7 +46,7 @@ export const aboutContent: Record<Lang, AboutText> = {
       gpa: "3.64 / 4.00",
       logo: "/photos/ulm.jpeg",
     },
-    location: { label: "Based in", city: "Bekasi", country: "Indonesia" },
+    location: { label: "Based in", city: "Banjarbaru", country: "Indonesia" },
     cta: "Ask me in chat",
     hint: "Swipe to see more photos",
   },
@@ -54,7 +54,7 @@ export const aboutContent: Record<Lang, AboutText> = {
     eyebrow: "Tentang saya",
     title: "Halo, saya Bagaskara",
     paragraphs: [
-      "Lulusan Ilmu Komputer dengan spesialisasi Data Science, dengan ketertarikan besar pada Artificial Intelligence, Machine Learning, Deep Learning, dan Large Language Models (LLM). Terbiasa memadukan riset machine learning dengan pengembangan perangkat lunak praktis, termasuk aplikasi mobile dan integrasi API. Pernah menerbitkan riset terindeks SINTA 2 dan berpengalaman langsung dengan Python, TensorFlow, PyTorch, Langflow, LLM, Next.js, React.js, Flutter, serta teknologi lainnya. Berantusias untuk membangun solusi teknologi yang cerdas, andal, dan berdampak, dengan tujuan mengembangkan karis sebagai AI Engineer dan mengubah riset serta ide menjadi solusi nyata.",
+      "Lulusan Ilmu Komputer dengan ketertarikan pada bidang Software Development dan Artificial Intelligence. Aktif mengeksplorasi teknologi baru dan mengembangkan berbagai aplikasi, mulai dari solusi berbasis AI hingga aplikasi mobile dan web. Memiliki pengalaman di bidang Machine Learning, Deep Learning, dan Large Language Models (LLMs), serta pengembangan aplikasi mobile dan web, integrasi API, dan rekayasa perangkat lunak. Terbiasa menggunakan berbagai teknologi seperti Python, TensorFlow, PyTorch, Langflow, Flutter, Dart, Java, JavaScript, React.js, Next.js, dan lainnya.",
     ],
     education: {
       label: "Pendidikan",
@@ -64,7 +64,7 @@ export const aboutContent: Record<Lang, AboutText> = {
       gpa: "3,64 / 4,00",
       logo: "/photos/ulm.jpeg",
     },
-    location: { label: "Domisili", city: "Bekasi", country: "Indonesia" },
+    location: { label: "Domisili", city: "Banjarbaru", country: "Indonesia" },
     cta: "Tanya lewat chat",
     hint: "Geser untuk melihat foto lainnya",
   },
