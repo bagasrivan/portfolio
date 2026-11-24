@@ -26,8 +26,8 @@ export const experiences: ExperienceItem[] = [
     id: "ulm-labeling",
     group: "work",
     org: "Universitas Lambung Mangkurat",
-    period: { en: "May 2026", id: "Mei 2026" },
-    role: { en: "Data Labeling (Freelance)", id: "Data Labeling (Freelance)" },
+    period: { en: "Feb - May 2026", id: "Feb - Mei 2026" },
+    role: { en: "Data Annotator", id: "Data Annotator" },
     points: {
       en: [
         "Annotated 900+ oil palm tree images using AnyLabeling, following the classes defined by stakeholders.",
@@ -52,12 +52,12 @@ export const experiences: ExperienceItem[] = [
       en: [
         "Developed SiBisa, a fullstack inventory and monitoring app, during a 4-month internship, from UI/UX design to a working Flutter application.",
         "Tested by 6 BMKG staff members and now in use at the office.",
-        "Integrated 3 REST API methods (GET, POST, PUT) to manage inventory data and display meteorological, climatological, and geophysical data in real time.",
+        "Integrated 3 REST API methods to manage inventory data and display meteorological, climatological, and geophysical data in real time.",
       ],
       id: [
         "Mengembangkan SiBisa, aplikasi inventaris dan monitoring fullstack, selama magang 4 bulan, dari perancangan UI/UX hingga aplikasi Flutter yang berfungsi.",
         "Diuji oleh 6 pegawai BMKG dan kini digunakan di kantor.",
-        "Mengintegrasikan 3 metode REST API (GET, POST, PUT) untuk mengelola data inventaris dan menampilkan data meteorologi, klimatologi, dan geofisika secara real time.",
+        "Mengintegrasikan 3 metode REST API untuk mengelola data inventaris dan menampilkan data meteorologi, klimatologi, dan geofisika secara real time.",
       ],
     },
     tech: ["Flutter", "Dart", "Figma", "REST API"],
@@ -122,8 +122,8 @@ export const experiences: ExperienceItem[] = [
     },
     tech: [
       "Mp3Fest 2025",
-      "MTQMN",
-      "Banua Creative Festival",
+      "MTQMN 2025",
+      "Banua Creative Festival 2025",
       "Hari Listrik Nasional 2025",
       "Fun Run Ciputra",
       "Batola Bersholawat",
@@ -196,7 +196,6 @@ export const experienceContent: Record<
 };
 
 export const committees: Committee[] = [
-  // ───────── 2025 ─────────
   {
     id: "amd-classroom-2025",
     year: 2025,
@@ -219,7 +218,7 @@ export const committees: Committee[] = [
   {
     id: "imagene-week-2024",
     year: 2024,
-    event: "Imagene Week",
+    event: "Imagene Week of HIMAKOM",
     org: "HIMAKOM",
     role: {
       en: "Sponsorship & Partnership Coordinator",
@@ -271,7 +270,7 @@ export const committees: Committee[] = [
     },
   },
   {
-    id: "musker-2023",
+    id: "muker-2023",
     year: 2023,
     event: "Musyawarah Kerja",
     org: "HIMAKOM",
@@ -284,7 +283,7 @@ export const committees: Committee[] = [
   {
     id: "imagene-week-2022",
     year: 2022,
-    event: "Imagene Week",
+    event: "Imagene Week of HIMAKOM",
     org: "HIMAKOM",
     role: {
       en: "Publication, Decoration & Documentation Member",
