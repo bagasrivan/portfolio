@@ -3,7 +3,7 @@ import { projects } from "@/lib/projects";
 
 const PROFILE = `
 Name: Bagaskara Ridho Vandio. Based in Banjarbaru, Indonesia.
-Education: Bachelor of Computer Science (Data Science concentration), Universitas Lambung Mangkurat, 2022-2026, GPA 3.64/4.00.
+Education: Bachelor of Computer Science, Universitas Lambung Mangkurat, 2022-2026, GPA 3.64/4.00.
 Thesis: Performance Analysis of ResNet50 and MobileNetV3 Models under Environmental Variations for Multi-Class Face Mask Classification using Transfer Learning.
 Publication: "Evaluating CNN Robustness for Face Mask Classification under Environmental Variations", published in JESSI, a SINTA 2 journal (June 2026).
 Goal: building a career as an Software & AI Engineer.
